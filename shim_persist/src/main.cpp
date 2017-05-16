@@ -71,7 +71,7 @@ BOOL writeToFile(char* res_data, DWORD res_size, const char *payloadName)
     CloseHandle(hFile);
 
     if (isDropped == TRUE) {
-    if (res_size != written) { //failed to write full buffer
+        if (res_size != written) { //failed to write full buffer
             DeleteFile(payloadName);
             return FALSE;
         }
