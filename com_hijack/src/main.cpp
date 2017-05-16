@@ -5,10 +5,11 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string>
+#include <shlguid.h>
 
 #include "resource.h"
 #include "sysutil.h"
-#include <shlguid.h>
+
 //CLSID of the COM component that you want to hijack:
 std::string COM_clsid = "{BCDE0395-E52F-467C-8E3D-C4579291692E}"; // CLSID_MMDeviceEnumerator (used i.e. by Firefox)
 
