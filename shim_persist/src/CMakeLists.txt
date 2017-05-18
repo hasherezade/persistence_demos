@@ -5,10 +5,12 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 
 set (srcs
     main.cpp
+    elevate.cpp
 )
 
 set (hdrs
     resource.h
+    elevate.h
 )
 
 set (rsrc
