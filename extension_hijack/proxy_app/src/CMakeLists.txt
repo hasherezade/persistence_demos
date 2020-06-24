@@ -8,3 +8,4 @@ set (srcs
 )
 
 add_executable (ProxyApp ${srcs})
+INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX} COMPONENT ${PROJECT_NAME} )
