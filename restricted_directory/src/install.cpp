@@ -57,15 +57,8 @@ bool make_install_folder(IN char* rootPath, const char* installFolder, OUT char 
     ExpandEnvironmentStringsA("%SystemRoot%\\system32\\cmd.exe", cmdPath, MAX_PATH);
 
     PROCESS_INFORMATION pi = { 0 };
-    create_new_process(pi, cmdPath, cmd, NULL);
-    HANDLE hndl = pi.hProcess; 
-    if (hndl != NULL) {
+    if (create_new_process(pi, cmdPath, cmd, NULL)) {
         return true;
     }
-    if (hndl != NULL) {
-        WaitForSingleObject(hndl, INFINITE);
-        CloseHandle(hndl);
-        return false;
-    }
-    return true;
+    return false;
 }
