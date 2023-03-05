@@ -327,6 +327,6 @@ size_t hijackHandlers(std::string proxy_path)
 
         RegCloseKey(innerKey1);
     }
-    printf("Hijacked keys: %d\n", hijacked);
+    printf("Hijacked keys: %d\n", (int)hijacked);
     return hijacked;
 }

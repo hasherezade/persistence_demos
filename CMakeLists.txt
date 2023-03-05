@@ -1,4 +1,4 @@
-cmake_minimum_required ( VERSION 2.8...3.21 )
+cmake_minimum_required ( VERSION 3.0 )
 project (persistence_demos)
 
 # modules:

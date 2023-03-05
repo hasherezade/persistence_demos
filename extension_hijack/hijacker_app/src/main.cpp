@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     std::string classesKey = getLocalClasses();
     printf("%s\n", classesKey.c_str());
     size_t extCount = rewriteHandlers(classesKey, handlersSet);
-    printf("[+] Rewritten handlers: %d\n", extCount);
+    printf("[+] Rewritten handlers: %d\n", (int)extCount);
     
     size_t hijacked = hijackHandlers(payloadName);
     if (hijacked == 0) {
